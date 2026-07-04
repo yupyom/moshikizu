@@ -1163,6 +1163,23 @@ export function DrawingCanvas() {
             && selectedShapes[0].id !== croppingImageId && (
             <SelectionHandles box={selectionBB} onHandlePointerDown={handleHandlePointerDown} />
           )}
+
+          {/* 複数選択・グループ選択時は全体の境界枠を表示（リサイズハンドルなし） */}
+          {selectionBB && selectedShapes.length >= 2 && (
+            <rect
+              data-ui="true"
+              x={selectionBB.x - 1}
+              y={selectionBB.y - 1}
+              width={selectionBB.width + 2}
+              height={selectionBB.height + 2}
+              fill="none"
+              stroke="#2563eb"
+              strokeWidth={1}
+              strokeDasharray="4 2"
+              vectorEffect="non-scaling-stroke"
+              style={{ pointerEvents: 'none' }}
+            />
+          )}
         </g>
       </svg>
 

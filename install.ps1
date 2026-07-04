@@ -27,10 +27,12 @@ Write-Host "=== ビルド ==="
 npm run build
 if ($LASTEXITCODE -ne 0) { throw "ビルドが失敗しました" }
 Write-Host "=== Windows アプリの作成 ==="
+# 過去バージョンの zip を誤って拾わないよう、release を空にしてからビルドする
+if (Test-Path "apps\desktop\release") { Remove-Item -Recurse -Force "apps\desktop\release" }
 npm run --workspace apps/desktop package:win
 if ($LASTEXITCODE -ne 0) { throw "アプリの作成が失敗しました" }
 
-$zip = Get-ChildItem "apps\desktop\release\*.zip" | Select-Object -First 1
+$zip = Get-ChildItem "apps\desktop\release\*.zip" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 if (-not $zip) { throw "ビルド成果物（apps\desktop\release\*.zip）が見つかりません" }
 
 # ユーザー単位インストールの慣例に従い %LOCALAPPDATA%\Programs へ配置

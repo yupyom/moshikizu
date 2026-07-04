@@ -28,6 +28,8 @@ npm run build
 
 if [ "$(uname)" = "Darwin" ]; then
   echo "=== macOS アプリの作成 ==="
+  # 過去バージョンの成果物を誤って拾わないよう、release/ を空にしてからビルドする
+  rm -rf apps/desktop/release
   npm run --workspace apps/desktop package
   APP=$(find apps/desktop/release -name "Moshikizu.app" -maxdepth 3 | head -1)
   if [ -n "$APP" ]; then
