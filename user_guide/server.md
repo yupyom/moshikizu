@@ -23,13 +23,51 @@ node apps/server/dist/index.js adduser <ユーザー名> <パスワード>
 node apps/server/dist/index.js     # → http://localhost:8940
 ```
 
+## 設定ファイル（config.json）
+
+サーバーの設定は、データディレクトリ内の `config.json` で行います
+（直接起動では `./server-data/config.json`、Docker では `/data/config.json`）。
+
+**このファイルは初回起動時に既定値で自動生成される**ので、起動前に用意しておく
+必要はありません。「一度起動する → 生成された config.json を編集する → 再起動する」
+が基本の流れです。設定は起動時に一度だけ読み込まれるため、**変更の反映には
+サーバーの再起動が必要**です（もちろん、初回起動前に自分で作成しておいても構いません）。
+
+すべての項目を書いた例:
+
+```json
+{
+  "ipAllowlist": ["203.0.113.5", "192.168.1.0/24"],
+  "sessionTtlHours": 168,
+  "baseUrl": "https://draw.example.com",
+  "smtp": {
+    "host": "smtp.example.com",
+    "port": 587,
+    "secure": false,
+    "user": "notify@example.com",
+    "pass": "********",
+    "from": "Moshikizu <notify@example.com>"
+  }
+}
+```
+
+| キー | 既定値 | 説明 |
+|---|---|---|
+| `ipAllowlist` | `[]` | 接続を許可する IPv4 アドレス（`"203.0.113.5"`）/ CIDR（`"192.168.1.0/24"`）のリスト。**空なら全IP許可**（ループバックは常時許可） |
+| `sessionTtlHours` | `168` | ログインセッションの有効時間（時間。既定は7日） |
+| `baseUrl` | なし | 招待・共有リンクのメールに記載する外部URL（未設定時は localhost） |
+| `smtp` | なし | メール通知の設定（任意。「メール通知」の節を参照） |
+
+ポートとデータの場所は環境変数で変更できます:
+`MOSHIKIZU_PORT`（既定 `8940`）/ `MOSHIKIZU_DATA_DIR`（既定 `./server-data`）。
+
 ## セキュリティ設定
 
 - **2段階認証（TOTP）**: ログイン後「ファイル > サーバー > 2段階認証を設定」で
   QRコードを認証アプリ（Google Authenticator 等）に登録
-- **IPv4 ホワイトリスト**: `server-data/config.json`（Docker では `/data/config.json`）の
-  `ipAllowlist` に IP / CIDR を列挙。例: `["203.0.113.5", "192.168.1.0/24"]`。
-  空なら全許可（ループバックは常時許可）
+- **IPv4 ホワイトリスト**: config.json の `ipAllowlist` に許可する IP / CIDR を列挙
+  （書き方は上の「設定ファイル」を参照）。設定するまでは全IP許可なので、
+  公開サーバーでは最初に設定してください
 - パスワードは scrypt ハッシュ保存。**TLS は Caddy / nginx 等のリバースプロキシ**を
   手前に置いてください
 
@@ -46,27 +84,34 @@ node apps/server/dist/index.js     # → http://localhost:8940
 
 ## メール通知（SMTP・任意）
 
-`config.json` に SMTP を設定すると、招待メールとコメント通知が有効になります。
-
-```json
-{
-  "baseUrl": "https://draw.example.com",
-  "smtp": {
-    "host": "smtp.example.com",
-    "port": 587,
-    "secure": false,
-    "user": "notify@example.com",
-    "pass": "********",
-    "from": "Moshikizu <notify@example.com>"
-  }
-}
-```
+config.json に `smtp` と `baseUrl` を設定すると（書き方は上の「設定ファイル」の例を参照）、
+招待メールとコメント通知が有効になります。
 
 - **ユーザー招待**: プロジェクト一覧の「ユーザーを招待」からユーザー名とメールを入力 →
   招待リンクがメール送信され、受け取った本人がパスワードを設定して有効化。
   SMTP未設定でも招待リンクは発行され、URLを手動で渡せます
 - **コメント通知**: コメント投稿時に、メールアドレス登録済みの他ユーザーへ通知
 - `baseUrl` はメールに記載するリンクの生成に使われます（未設定時は localhost）
+
+## サーバーのアップデート
+
+**Docker の場合**: リポジトリを更新してイメージを再ビルドし、コンテナを作り直します。
+データ（ユーザー・プロジェクト・config.json）はボリューム `moshikizu-data` にあるので消えません。
+
+```bash
+git pull
+docker build -t moshikizu .
+docker rm -f moshikizu
+docker run -d -p 8940:8940 -v moshikizu-data:/data --name moshikizu moshikizu
+```
+
+**直接動かしている場合**: `git pull` → 依存関係の更新と再ビルド → プロセス再起動。
+
+```bash
+git pull && npm install
+npm run build && npm run build -w @draw/server
+# systemd / pm2 等でプロセスを再起動
+```
 
 ## デプロイ先の目安
 

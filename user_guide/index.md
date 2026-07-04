@@ -14,9 +14,30 @@
 | [エージェント連携（MCP）](mcp.md) | Claude Code 等から図を描かせる・API リファレンス |
 | [サーバー設置ガイド](server.md) | チーム共有用コラボサーバーのセルフホスト |
 
-## インストール（セルフビルド）
+## インストール
 
-Node.js 20 以上と git が必要です。
+いずれの方法も [Node.js](https://nodejs.org/) 20 以上と git が必要です。
+
+### かんたんインストール（推奨）
+
+```bash
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/yupyom/moshikizu/main/install.sh | bash
+
+# Windows (PowerShell)
+irm https://raw.githubusercontent.com/yupyom/moshikizu/main/install.ps1 | iex
+```
+
+ソース一式が `~/.moshikizu`（Windows は `%USERPROFILE%\.moshikizu`）に取得され、
+デスクトップアプリがビルド・配置されます。
+
+- **macOS**: `/Applications/Moshikizu.app`
+  （コード署名なしのため、初回は**右クリック > 開く**で起動）
+- **Windows**: ホームフォルダの `Moshikizu\Moshikizu.exe`
+  （SmartScreen 警告が出たら「詳細情報 > 実行」）
+- **Linux**: `moshikizu` コマンドでブラウザ版が起動（`~/.local/bin` に配置）
+
+### 手動セットアップ（セルフビルド）
 
 ```bash
 git clone https://github.com/yupyom/moshikizu.git
@@ -26,13 +47,24 @@ npm install
 npm run desktop       # デスクトップ版（Electron）
 ```
 
+## アップデート
+
+**かんたんインストールのコマンドをもう一度実行**してください。
+再実行すると更新として動作します（git pull → 再ビルド → アプリ差し替え。データや設定は消えません）。
+
+新しいバージョンが出ているかは、アプリの**ヘルプ > 更新を確認**でも確認できます
+（環境設定で main=安定版 / dev=プレリリース のチャンネルを選択）。
+
+手動セットアップの場合は、リポジトリで `git pull` して `npm install` を再実行してください。
+
 ## サンプル
 
 `samples/` に Moshikizu 自身（の MCP 機能）で描いたサンプル文書が入っています。
 アプリの「ファイル > 開く」から開けるほか、ブラウザ版なら
 `http://localhost:5173/?doc=/samples/architecture.drawjson` のように URL でも開けます。
 
-インストールスクリプトを使った場合の場所は **`~/.moshikizu/samples/`** です
+インストールスクリプトを使った場合の場所は **`~/.moshikizu/samples/`**
+（Windows は `%USERPROFILE%\.moshikizu\samples`）です
 （隠しフォルダのため、macOS のファイルダイアログでは **⌘⇧G** を押して
 `~/.moshikizu/samples` と入力すると開けます）。
 
