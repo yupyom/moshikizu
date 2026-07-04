@@ -19,10 +19,12 @@ import { LoginDialog } from '../dialogs/LoginDialog';
 import { ServerProjectsDialog } from '../dialogs/ServerProjectsDialog';
 import { CommentsDialog } from '../dialogs/CommentsDialog';
 import { TotpSetupDialog } from '../dialogs/TotpSetupDialog';
+import { PdfExportDialog } from '../dialogs/PdfExportDialog';
 import { useServerStore } from '../../store/serverStore';
 import styles from './MenuBar.module.css';
 
-const APP_VERSION = '0.1.0';
+// vite.config.ts の define で package.json の version が入る
+const APP_VERSION = __APP_VERSION__;
 
 const FILE_PICKER_TYPES: FilePickerAcceptType[] = [
   { description: 'Moshikizu ドキュメント', accept: { 'application/json': ['.drawjson'] } },
@@ -61,6 +63,7 @@ export function MenuBar() {
   const [showServerProjects, setShowServerProjects] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showTotpSetup, setShowTotpSetup] = useState(false);
+  const [showPdfExport, setShowPdfExport] = useState(false);
   const server = useServerStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
   // File System Access API の保存先ハンドル（「保存」で同じファイルに上書きする）
@@ -124,6 +127,16 @@ export function MenuBar() {
     fileHandleRef.current = null;
     lastModifiedRef.current = null;
     setExternalChange(false);
+  };
+
+  // ドキュメントを閉じてダッシュボード（起動画面）に戻る
+  const handleClose = () => {
+    if (!confirm('ドキュメントを閉じますか？（保存していない変更は失われます）')) return;
+    store.newDocument();
+    fileHandleRef.current = null;
+    lastModifiedRef.current = null;
+    setExternalChange(false);
+    window.dispatchEvent(new CustomEvent('draw:show-welcome'));
   };
 
   const applyDocument = (doc: DrawDocument) => {
@@ -359,17 +372,18 @@ export function MenuBar() {
 
   // ---- ズーム（DrawingCanvas にイベントで伝える） ----
   // PDF書き出し（ページ順=タブ順、マスターはページに含めない。範囲例 "1,3,4-5"）
-  const doExportPdf = async () => {
+  // ページ範囲はダイアログで入力（Electron は prompt() 非サポートのため）
+  const doExportPdf = () => {
     const pageCanvases = store.canvases.filter((c) => !c.isMaster);
     if (pageCanvases.length === 0) {
       alert('ページになるキャンバスがありません（マスターのみ）。');
       return;
     }
-    const spec = prompt(
-      `PDFにするページ範囲（全${pageCanvases.length}ページ、例: 1,3,4-5。空欄=全ページ）`,
-      '',
-    );
-    if (spec === null) return;
+    setShowPdfExport(true);
+  };
+
+  const runPdfExport = async (spec: string) => {
+    const pageCanvases = store.canvases.filter((c) => !c.isMaster);
     const nums = parsePageRanges(spec, pageCanvases.length);
     if (nums.length === 0) {
       alert('有効なページがありません。');
@@ -460,6 +474,7 @@ export function MenuBar() {
             <div className={styles.dropdown}>
               <MenuItem label="新規" icon="note_add" onClick={() => run(handleNew)} />
               <MenuItem label="開く…" icon="folder_open" shortcut="⌘O" onClick={() => run(handleLoad)} />
+              <MenuItem label="閉じる" icon="close" onClick={() => run(handleClose)} />
               <div className={styles.dropDivider} />
               <MenuItem label="保存" icon="save" shortcut="⌘S" onClick={() => run(() => handleSave())} />
               <MenuItem label="別名保存…" icon="save_as" onClick={() => run(() => handleSave(true))} />
@@ -499,6 +514,7 @@ export function MenuBar() {
               <MenuItem label="元に戻す" icon="undo" shortcut="⌘Z" disabled={store.past.length === 0} onClick={() => run(store.undo)} />
               <MenuItem label="やり直す" icon="redo" shortcut="⌘⇧Z" disabled={store.future.length === 0} onClick={() => run(store.redo)} />
               <div className={styles.dropDivider} />
+              <MenuItem label="カット" icon="content_cut" shortcut="⌘X" disabled={!hasSelection} onClick={() => run(store.cutToClipboard)} />
               <MenuItem label="コピー" icon="content_copy" shortcut="⌘C" disabled={!hasSelection} onClick={() => run(store.copyToClipboard)} />
               <MenuItem label="貼り付け" icon="content_paste" shortcut="⌘V" disabled={store.clipboard.length === 0} onClick={() => run(store.pasteClipboard)} />
               <MenuItem label="複製" icon="control_point_duplicate" shortcut="⌘D" disabled={!hasSelection} onClick={() => run(store.duplicateSelected)} />
@@ -619,6 +635,13 @@ export function MenuBar() {
       <CommentsDialog projectId={store.projectId} projectName={store.projectName} onClose={() => setShowComments(false)} />
     )}
     {showTotpSetup && <TotpSetupDialog onClose={() => setShowTotpSetup(false)} />}
+    {showPdfExport && (
+      <PdfExportDialog
+        pageCount={store.canvases.filter((c) => !c.isMaster).length}
+        onExport={(spec) => void runPdfExport(spec)}
+        onClose={() => setShowPdfExport(false)}
+      />
+    )}
 
     {/* 外部変更バナー（MCP等による編集の検知） */}
     {externalChange && (

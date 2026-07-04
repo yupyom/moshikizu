@@ -4,7 +4,7 @@
 //   ポートは DRAW_DEV_URL で変更可（デフォルト http://localhost:5173）
 // - 本番時: apps/web のビルド成果物（dist/）を file:// で読み込む
 // - DRAW_SMOKE=1: ウィンドウを表示せず起動確認だけして終了（CI/検証用）
-const { app, BrowserWindow, shell, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
 // ---- 更新確認（GitHub Releases） ----
 // コード署名なし配布のため autoUpdater は使わず、新版の検知と誘導のみ行う。
 // チャンネル: 'main'（安定版・prerelease除外）/ 'dev'（プレリリース含む最新）
@@ -210,7 +210,25 @@ ipcMain.handle('docs:list-templates', () => listDocsFiles('Templates', '.drawjso
 ipcMain.handle('docs:list-themes', () => listDocsFiles('Themes', '.drawtheme.json'));
 ipcMain.handle('docs:path', () => DOCS_DIR());
 
+// メニューはアプリ内メニューバー（レンダラー側）が担うため、OS標準メニューは重複させない。
+// - Windows/Linux: ウィンドウ内に出て二重メニューになるため非表示
+// - macOS: 画面上部のメニューは残すが、テキスト入力の⌘C/⌘V等が効くよう標準ロールの最小構成に
+// - 開発時: リロード・DevTools のため Electron デフォルトメニューをそのまま使う
+function setupAppMenu() {
+  if (isDev) return;
+  if (process.platform === 'darwin') {
+    Menu.setApplicationMenu(Menu.buildFromTemplate([
+      { role: 'appMenu' },
+      { role: 'editMenu' },
+      { role: 'windowMenu' },
+    ]));
+  } else {
+    Menu.setApplicationMenu(null);
+  }
+}
+
 app.whenReady().then(() => {
+  setupAppMenu();
   ensureDocsDirs();
   createWindow();
   app.on('activate', () => {

@@ -57,6 +57,23 @@ describe('drawingStore', () => {
     expect(updated.x).toBe(50);
   });
 
+  it('cutToClipboard は選択図形を削除しクリップボードへ入れる（undo可・paste可）', () => {
+    const store = useDrawingStore.getState();
+    const r = makeRect();
+    store.addShape(r);
+    store.selectIds([r.id]);
+    useDrawingStore.getState().cutToClipboard();
+    let state = useDrawingStore.getState();
+    expect(state.shapes).toHaveLength(0);
+    expect(state.clipboard).toHaveLength(1);
+    state.pasteClipboard();
+    state = useDrawingStore.getState();
+    expect(state.shapes).toHaveLength(1);
+    state.undo(); // 貼り付けを戻す
+    useDrawingStore.getState().undo(); // カットを戻す
+    expect(useDrawingStore.getState().shapes).toHaveLength(1);
+  });
+
   it('duplicates selected shapes with offset', () => {
     const store = useDrawingStore.getState();
     const r = makeRect();

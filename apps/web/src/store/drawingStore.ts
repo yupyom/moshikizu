@@ -52,6 +52,7 @@ export interface DrawingState {
   /** アプリ内クリップボード */
   clipboard: Shape[];
   copyToClipboard: () => void;
+  cutToClipboard: () => void;
   pasteClipboard: () => void;
   undo: () => void;
   redo: () => void;
@@ -245,6 +246,13 @@ export const useDrawingStore = create<DrawingState>((set, get) => ({
   copyToClipboard: () => {
     const copied = get().copySelected();
     if (copied.length > 0) set({ clipboard: copied });
+  },
+
+  cutToClipboard: () => {
+    const copied = get().copySelected();
+    if (copied.length === 0) return;
+    set({ clipboard: copied });
+    get().deleteSelected();
   },
 
   pasteClipboard: () => {

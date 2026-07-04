@@ -8,7 +8,7 @@ const SHORTCUTS: { keys: string; desc: string }[] = [
   { keys: '⌘S', desc: '保存（上書き）' },
   { keys: '⌘O', desc: '開く' },
   { keys: '⌘Z / ⌘⇧Z', desc: '元に戻す / やり直す' },
-  { keys: '⌘C / ⌘V', desc: 'コピー / 貼り付け' },
+  { keys: '⌘X / ⌘C / ⌘V', desc: 'カット / コピー / 貼り付け' },
   { keys: '⌘D', desc: '複製' },
   { keys: 'Delete', desc: '選択を削除' },
   { keys: '⌘F', desc: '検索と置換' },

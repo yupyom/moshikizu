@@ -35,27 +35,13 @@ export function renderChart(s: ChartShape, table: TableShape | null, font: strin
   const parts: string[] = [];
   parts.push(`<rect x="${n(s.x)}" y="${n(s.y)}" width="${n(s.width)}" height="${n(s.height)}" fill="#ffffff" stroke="#e5e7eb"/>`);
 
-  // 凡例（上部）
-  const showLegend = (s.showLegend ?? true) && data.series.length > 1 && !['pie', 'donut'].includes(s.chartType);
+  // 凡例（上部）。円系はカテゴリ、それ以外は系列名
+  const isPieLike = ['pie', 'donut'].includes(s.chartType);
+  const showLegend = (s.showLegend ?? true) && (isPieLike || data.series.length > 1);
   let top = s.y + 8;
   if (showLegend) {
-    let lx = s.x + 12;
-    data.series.forEach((se, i) => {
-      parts.push(`<rect x="${n(lx)}" y="${n(top)}" width="10" height="10" fill="${colors[i % colors.length]}"/>`);
-      parts.push(txt(lx + 14, top + 5, se.name, 10, font, 'start'));
-      lx += 20 + se.name.length * 11;
-    });
-    top += 20;
-  }
-  if (['pie', 'donut'].includes(s.chartType)) {
-    // 円系の凡例はカテゴリ
-    let lx = s.x + 12;
-    data.categories.forEach((c, i) => {
-      parts.push(`<rect x="${n(lx)}" y="${n(top)}" width="10" height="10" fill="${colors[i % colors.length]}"/>`);
-      parts.push(txt(lx + 14, top + 5, c, 10, font, 'start'));
-      lx += 20 + c.length * 11;
-    });
-    top += 20;
+    const labels = isPieLike ? data.categories : data.series.map((se) => se.name);
+    top = renderLegend(parts, labels, colors, s, top, font);
   }
 
   const body = { x: s.x + 44, y: top + 4, w: s.width - 56, h: s.y + s.height - top - 30 };
@@ -80,6 +66,35 @@ export function renderChart(s: ChartShape, table: TableShape | null, font: strin
       break;
   }
   return `<g>${parts.join('')}</g>`;
+}
+
+/** 凡例テキストの概算幅（CJKは全角、他は約0.62em） */
+function estTextWidth(t: string, size: number): number {
+  let w = 0;
+  for (const ch of t) {
+    w += /[⺀-鿿豈-﫿＀-｠　-〿]/.test(ch) ? size : size * 0.62;
+  }
+  return w;
+}
+
+/** 凡例を描画する。枠の右端で折り返し、消費した高さ分進めた次のY位置を返す */
+function renderLegend(parts: string[], labels: string[], colors: string[], s: ChartShape, top: number, font: string): number {
+  const left = s.x + 12;
+  const right = s.x + s.width - 12;
+  const rowH = 16;
+  let lx = left;
+  let ly = top;
+  labels.forEach((label, i) => {
+    const itemW = 14 + estTextWidth(label, 10);
+    if (lx > left && lx + itemW > right) {
+      lx = left;
+      ly += rowH;
+    }
+    parts.push(`<rect x="${n(lx)}" y="${n(ly)}" width="10" height="10" fill="${colors[i % colors.length]}"/>`);
+    parts.push(txt(lx + 14, ly + 5, label, 10, font, 'start'));
+    lx += itemW + 10;
+  });
+  return ly + 20;
 }
 
 /** Y軸スケール（0基準を含む） */

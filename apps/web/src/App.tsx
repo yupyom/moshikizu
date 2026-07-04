@@ -42,6 +42,13 @@ function Editor() {
     () => !new URLSearchParams(location.search).has('doc'),
   );
 
+  // 「ファイル > 閉じる」からダッシュボードに戻る
+  useEffect(() => {
+    const onShowWelcome = () => setShowWelcome(true);
+    window.addEventListener('draw:show-welcome', onShowWelcome);
+    return () => window.removeEventListener('draw:show-welcome', onShowWelcome);
+  }, []);
+
   // デスクトップ版: 書類/Moshikizu/Themes の .drawtheme.json を起動時に取込（名前で上書き）
   useEffect(() => {
     if (!window.drawDesktop) return;
@@ -68,7 +75,6 @@ function Editor() {
         useDrawingStore.getState().loadDocument(parseDocument(data));
       })
       .catch(() => console.warn('ドキュメントを読み込めませんでした:', docUrl));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // プロパティパネルの幅（ドラッグで調整可能・永続化）

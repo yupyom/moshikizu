@@ -275,6 +275,8 @@ export function DrawingCanvas() {
         store.redo();
       } else if (isMod && e.key === 'c') {
         store.copyToClipboard();
+      } else if (isMod && e.key === 'x') {
+        store.cutToClipboard();
       } else if (isMod && e.key === 'v') {
         store.pasteClipboard();
       } else if (isMod && e.key === 'd') {
@@ -667,8 +669,12 @@ export function DrawingCanvas() {
         height: Math.abs(rubberBand.h),
       };
       if (selBox.width > 2 || selBox.height > 2) {
-        const ids = store.shapes
-          .filter((s) => s.canvasId === store.activeCanvasId && boxesOverlap(getBoundingBox(s), selBox))
+        const inCanvas = store.shapes.filter((s) => s.canvasId === store.activeCanvasId);
+        const hit = inCanvas.filter((s) => boxesOverlap(getBoundingBox(s), selBox));
+        // グループは選択単位: 1つでも掛かったグループは全メンバーを選択に含める
+        const hitGroups = new Set(hit.map((s) => s.groupId).filter(Boolean));
+        const ids = inCanvas
+          .filter((s) => (s.groupId && hitGroups.has(s.groupId)) || hit.includes(s))
           .map((s) => s.id);
         store.selectIds(ids);
       }
@@ -792,20 +798,18 @@ export function DrawingCanvas() {
       setCroppingImageId(null);
     }
 
+    // グループに属する図形はグループ全体を選択単位にする
+    const clicked = store.shapes.find((s) => s.id === shapeId);
+    const clickedUnit = clicked?.groupId
+      ? store.shapes
+          .filter((s) => s.groupId === clicked.groupId && s.canvasId === store.activeCanvasId)
+          .map((s) => s.id)
+      : [shapeId];
+
     if (e.shiftKey) {
-      store.addToSelection(shapeId);
+      store.selectIds([...store.selectedIds, ...clickedUnit]);
     } else if (!store.selectedIds.has(shapeId)) {
-      // グループに属する図形はグループ全体を選択
-      const clicked = store.shapes.find((s) => s.id === shapeId);
-      if (clicked?.groupId) {
-        store.selectIds(
-          store.shapes
-            .filter((s) => s.groupId === clicked.groupId && s.canvasId === store.activeCanvasId)
-            .map((s) => s.id),
-        );
-      } else {
-        store.selectIds([shapeId]);
-      }
+      store.selectIds(clickedUnit);
     }
 
     // Alt+ドラッグ: その場で複製してから複製側を動かす
