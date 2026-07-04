@@ -148,6 +148,8 @@ export function MenuBar() {
         let handle = saveAs ? null : fileHandleRef.current;
         if (!handle) {
           handle = await window.showSaveFilePicker({
+      id: 'moshikizu-docs',
+      startIn: 'documents',
             suggestedName: `${store.projectName}.drawjson`,
             types: FILE_PICKER_TYPES,
           });
@@ -193,7 +195,9 @@ export function MenuBar() {
   const handleLoad = async () => {
     if (window.showOpenFilePicker) {
       try {
-        const [handle] = await window.showOpenFilePicker({ types: FILE_PICKER_TYPES });
+        const [handle] = await window.showOpenFilePicker({
+      id: 'moshikizu-docs',
+      startIn: 'documents', types: FILE_PICKER_TYPES });
         await openFromHandle(handle);
       } catch (err) {
         if (err instanceof DOMException && err.name === 'AbortError') return; // キャンセル

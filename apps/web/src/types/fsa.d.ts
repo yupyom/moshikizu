@@ -7,11 +7,17 @@ interface FilePickerAcceptType {
 }
 
 interface SaveFilePickerOptions {
+  /** ダイアログの記憶単位（アプリ固有IDで前回フォルダを覚える） */
+  id?: string;
+  /** 初回の開始場所（'documents' 等） */
+  startIn?: 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos';
   suggestedName?: string;
   types?: FilePickerAcceptType[];
 }
 
 interface OpenFilePickerOptions {
+  id?: string;
+  startIn?: 'desktop' | 'documents' | 'downloads' | 'music' | 'pictures' | 'videos';
   types?: FilePickerAcceptType[];
   multiple?: boolean;
 }
