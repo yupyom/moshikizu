@@ -1,0 +1,301 @@
+{
+  "version": 3,
+  "id": "e9074ab7-f3e0-4c1e-b59f-9e8d17942714",
+  "name": "サーバー公開の構成",
+  "updatedAt": "2026-07-04T00:16:25.225Z",
+  "canvases": [
+    {
+      "id": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc",
+      "name": "キャンバス 1",
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "shapes": [
+    {
+      "type": "text",
+      "x": 60,
+      "y": 70,
+      "text": "コラボサーバーを公開するときの構成",
+      "fontSize": 26,
+      "fontWeight": "bold",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "ddc84133-3bc8-4533-bba6-0225cf967af6",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 100,
+      "text": "個人利用ならサーバー不要（デスクトップ版 / 静的ホスティングで完結）。チーム共有時のみこの構成にする",
+      "fontSize": 14,
+      "fontWeight": "regular",
+      "color": "#555555",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "33af1495-c5a6-408d-b8d2-e786792db9e3",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "svg",
+      "x": 90,
+      "y": 190,
+      "width": 72,
+      "height": 72,
+      "svgContent": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\"><path fill=\"#4a90d9\" d=\"M4 6h16v10H4m16 2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4c-1.11 0-2 .89-2 2v10a2 2 0 0 0 2 2H0v2h24v-2z\"/></svg>",
+      "originalWidth": 24,
+      "originalHeight": 24,
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "7e9a73bd-c725-47e9-9ab2-dba3fb176377",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "text",
+      "x": 70,
+      "y": 300,
+      "text": "チームメンバー\n（ブラウザ）",
+      "fontSize": 14,
+      "fontWeight": "regular",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "align": "center",
+      "id": "cdd2c017-8a40-476a-a538-d85a7222b580",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "roundedRect",
+      "x": 320,
+      "y": 180,
+      "width": 220,
+      "height": 100,
+      "cornerRadius": 10,
+      "fillColor": "#f5f5f7",
+      "strokeColor": "#9ca3af",
+      "strokeWidth": 2,
+      "label": {
+        "text": "リバースプロキシ\nCaddy / nginx",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "352a4735-d786-4fdd-af8b-857b9e950936",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "svg",
+      "x": 410,
+      "y": 130,
+      "width": 40,
+      "height": 40,
+      "svgContent": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\"><path fill=\"#6bbf6b\" d=\"M21 11c0 5.55-3.84 10.74-9 12c-5.16-1.26-9-6.45-9-12V5l9-4l9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z\"/></svg>",
+      "originalWidth": 24,
+      "originalHeight": 24,
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "adb9b37e-48e0-4616-9126-10df1a5dd9cf",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "roundedRect",
+      "x": 640,
+      "y": 150,
+      "width": 420,
+      "height": 320,
+      "cornerRadius": 10,
+      "fillColor": "#f8fafc",
+      "strokeColor": "#94a3b8",
+      "strokeWidth": 2,
+      "label": {
+        "text": "",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "d19a7e48-6882-4c03-994f-77831b96b53f",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "svg",
+      "x": 660,
+      "y": 165,
+      "width": 40,
+      "height": 40,
+      "svgContent": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\"><path fill=\"#4a90d9\" d=\"M21.81 10.25c-.06-.04-.56-.43-1.64-.43c-.28 0-.56.03-.84.08c-.21-1.4-1.38-2.11-1.43-2.14l-.29-.17l-.18.27c-.24.36-.43.77-.51 1.19c-.2.8-.08 1.56.33 2.21c-.49.28-1.29.35-1.46.35H2.62c-.34 0-.62.28-.62.63c0 1.15.18 2.3.58 3.38c.45 1.19 1.13 2.07 2 2.61c.98.6 2.59.94 4.42.94c.79 0 1.61-.07 2.42-.22c1.12-.2 2.2-.59 3.19-1.16A8.3 8.3 0 0 0 16.78 16c1.05-1.17 1.67-2.5 2.12-3.65h.19c1.14 0 1.85-.46 2.24-.85c.26-.24.45-.53.59-.87l.08-.24zm-17.96.99h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H3.85c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.43 0h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H6.28c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.47 0h1.75c.1 0 .17-.07.17-.16V9.5c0-.08-.06-.16-.17-.16H8.75c-.08 0-.15.07-.15.16v1.58c0 .09.06.16.15.16m2.44 0h1.77c.08 0 .15-.07.15-.16V9.5c0-.08-.06-.16-.15-.16h-1.77c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16M6.28 9h1.76c.08 0 .16-.09.16-.18V7.25c0-.09-.07-.16-.16-.16H6.28c-.09 0-.16.06-.16.16v1.57c.01.09.07.18.16.18m2.47 0h1.75c.1 0 .17-.09.17-.18V7.25c0-.09-.06-.16-.17-.16H8.75c-.08 0-.15.06-.15.16v1.57c0 .09.06.18.15.18m2.44 0h1.77c.08 0 .15-.09.15-.18V7.25c0-.09-.07-.16-.15-.16h-1.77c-.08 0-.15.06-.15.16v1.57c0 .09.07.18.15.18m0-2.28h1.77c.08 0 .15-.07.15-.16V5c0-.1-.07-.17-.15-.17h-1.77c-.08 0-.15.06-.15.17v1.56c0 .08.07.16.15.16m2.46 4.52h1.76c.09 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16h-1.76c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16\"/></svg>",
+      "originalWidth": 24,
+      "originalHeight": 24,
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "6fd00996-b63f-44a8-84f3-32b21cea5dda",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "text",
+      "x": 710,
+      "y": 192,
+      "text": "Docker コンテナ（VPS / Dokploy等）",
+      "fontSize": 15,
+      "fontWeight": "bold",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "9e4ceabe-b9f4-4fa3-9e6d-09501f6f0bb2",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "roundedRect",
+      "x": 680,
+      "y": 230,
+      "width": 340,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#f0fdf4",
+      "strokeColor": "#6bbf6b",
+      "strokeWidth": 2,
+      "label": {
+        "text": "Moshikizu サーバー\nHono + 静的配信 + API",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "a52d36bd-b81e-45fe-8a70-a59ff14639c0",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "svg",
+      "x": 700,
+      "y": 360,
+      "width": 48,
+      "height": 48,
+      "svgContent": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\"><path fill=\"#9ca3af\" d=\"M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4m6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23zm0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36zM12 9C8.13 9 6 7.5 6 7s2.13-2 6-2s6 1.5 6 2s-2.13 2-6 2\"/></svg>",
+      "originalWidth": 24,
+      "originalHeight": 24,
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "7f2c5945-0882-4766-a569-4b0d0da6f5f3",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "text",
+      "x": 760,
+      "y": 380,
+      "text": "SQLite（/data ボリューム）\nユーザー・プロジェクト・コメント・テーマ",
+      "fontSize": 13,
+      "fontWeight": "regular",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "cc386fe5-d866-4c83-ad5f-ba35fa10b7db",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 180,
+          "y": 230
+        },
+        {
+          "x": 320,
+          "y": 230
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "label": {
+        "text": "HTTPS",
+        "fontSize": 12,
+        "fontWeight": "regular",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#555555"
+      },
+      "id": "d5881fb0-5322-42ae-86fd-346c7b27bdab",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 540,
+          "y": 230
+        },
+        {
+          "x": 640,
+          "y": 230
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "label": {
+        "text": "HTTP :8940",
+        "fontSize": 12,
+        "fontWeight": "regular",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#555555"
+      },
+      "id": "15ee99cd-a2b1-4d29-927f-8fe63d8a5bbf",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 850,
+          "y": 320
+        },
+        {
+          "x": 850,
+          "y": 355
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "id": "406cea1a-bcb3-4997-ad51-e90d393a1520",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 560,
+      "text": "セキュリティ: パスワード（scrypt）+ TOTP 2段階認証（QRコード登録）+ IPv4ホワイトリスト（CIDR対応）",
+      "fontSize": 14,
+      "fontWeight": "bold",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "a2994572-9508-4f71-ba9a-bd5d973a5362",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 590,
+      "text": "TLS はリバースプロキシに任せる。config.json の ipAllowlist で接続元を制限できる",
+      "fontSize": 13,
+      "fontWeight": "regular",
+      "color": "#555555",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "f10cfbf2-6146-4087-944c-a438bd32563e",
+      "canvasId": "4c8a9028-ceaa-4c49-8a9f-c072a65fc0fc"
+    }
+  ],
+  "assets": []
+}

@@ -9,10 +9,11 @@ dist/
 # Vite cache
 .vite/
 
-# User documents（同梱サンプルは除外しない）
+# User documents（同梱サンプル・プレイグラウンド配信分は除外しない）
 *.drawjson
 !samples/*.drawjson
 !apps/web/public/samples/*.drawjson
+!docs/app/samples/*.drawjson
 
 # OS
 .DS_Store

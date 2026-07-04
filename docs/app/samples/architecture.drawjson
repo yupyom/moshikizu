@@ -1,0 +1,374 @@
+{
+  "version": 3,
+  "id": "e662f823-0b28-4d7d-9539-471d4bce63e8",
+  "name": "Moshikizu アーキテクチャ",
+  "updatedAt": "2026-07-04T00:16:23.106Z",
+  "canvases": [
+    {
+      "id": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4",
+      "name": "キャンバス 1",
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "shapes": [
+    {
+      "type": "text",
+      "x": 60,
+      "y": 70,
+      "text": "Moshikizu のアーキテクチャ",
+      "fontSize": 26,
+      "fontWeight": "bold",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "af4ad407-2c80-4d98-b5c3-243cf6b3ec88",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 100,
+      "text": "コアを純TSパッケージに分離し、Web・デスクトップ・サーバー・MCPが同じ描画/スキーマを共有する",
+      "fontSize": 14,
+      "fontWeight": "regular",
+      "color": "#555555",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "18d749bc-e856-4541-8c15-8ba9b7f8cf21",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 60,
+      "y": 150,
+      "width": 240,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#eef4fb",
+      "strokeColor": "#4a90d9",
+      "strokeWidth": 2,
+      "label": {
+        "text": "apps/web\n（React + Vite）",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "3471ac90-d711-4fed-9791-76561124ba39",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 340,
+      "y": 150,
+      "width": 240,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#eef4fb",
+      "strokeColor": "#4a90d9",
+      "strokeWidth": 2,
+      "label": {
+        "text": "apps/desktop\n（Electron）",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "e974d19b-5415-4a5a-902d-b34bf5085ecb",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 620,
+      "y": 150,
+      "width": 240,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#f0fdf4",
+      "strokeColor": "#6bbf6b",
+      "strokeWidth": 2,
+      "label": {
+        "text": "apps/server\n（Hono + SQLite）",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "d0135abc-3986-4b6a-b381-adaf960e9de4",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 940,
+      "y": 320,
+      "width": 280,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#fef9ec",
+      "strokeColor": "#e6c050",
+      "strokeWidth": 2,
+      "label": {
+        "text": "MCPクライアント\n（Claude Code 等）",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "49c30bb9-2c90-45c5-b9d4-07015f19fdd9",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 60,
+      "y": 420,
+      "width": 240,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#f5f5f7",
+      "strokeColor": "#9ca3af",
+      "strokeWidth": 2,
+      "label": {
+        "text": "packages/core\nモデル・数式・幾何",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "7c21c385-4b32-436f-839e-31324c887bf7",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 340,
+      "y": 420,
+      "width": 240,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#f5f5f7",
+      "strokeColor": "#9ca3af",
+      "strokeWidth": 2,
+      "label": {
+        "text": "packages/renderer\nShape[] → SVG",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "c9ca90c6-89d1-45e4-a911-af93e217cfee",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "roundedRect",
+      "x": 620,
+      "y": 420,
+      "width": 240,
+      "height": 90,
+      "cornerRadius": 10,
+      "fillColor": "#fef9ec",
+      "strokeColor": "#e6c050",
+      "strokeWidth": 2,
+      "label": {
+        "text": "packages/mcp\nヘッドレスMCP",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#1a1a1a"
+      },
+      "id": "626d4366-7585-4642-af64-1d4b655f0bdc",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 180,
+          "y": 240
+        },
+        {
+          "x": 180,
+          "y": 420
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "id": "e92a9421-f2c1-4590-b8c2-3463e0ce5d38",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 460,
+          "y": 240
+        },
+        {
+          "x": 460,
+          "y": 420
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "id": "3d065464-cf8a-49ec-8f92-de6e5f7297a3",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 740,
+          "y": 240
+        },
+        {
+          "x": 740,
+          "y": 420
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "id": "84b5d57f-108e-4b0e-955d-c444c0dce517",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 460,
+          "y": 150
+        },
+        {
+          "x": 460,
+          "y": 120
+        },
+        {
+          "x": 180,
+          "y": 120
+        },
+        {
+          "x": 180,
+          "y": 150
+        }
+      ],
+      "strokeColor": "#555555",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "pathStyle": "orthogonal",
+      "strokeDash": "dashed",
+      "label": {
+        "text": "webを同梱",
+        "fontSize": 12,
+        "fontWeight": "regular",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#555555"
+      },
+      "id": "7973778b-2a30-4bb4-9083-2315f54000f3",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 940,
+          "y": 350
+        },
+        {
+          "x": 460,
+          "y": 350
+        },
+        {
+          "x": 460,
+          "y": 240
+        }
+      ],
+      "strokeColor": "#b8860b",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "strokeDash": "dashed",
+      "label": {
+        "text": "MCP (HTTP)・開いている図を直接編集",
+        "fontSize": 12,
+        "fontWeight": "regular",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#555555"
+      },
+      "id": "ce7e95ea-f546-4252-bb99-424ba8ab35ba",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "line",
+      "points": [
+        {
+          "x": 1080,
+          "y": 410
+        },
+        {
+          "x": 1080,
+          "y": 465
+        },
+        {
+          "x": 860,
+          "y": 465
+        }
+      ],
+      "strokeColor": "#b8860b",
+      "strokeWidth": 2,
+      "startMarker": "none",
+      "endMarker": "arrow",
+      "strokeDash": "dashed",
+      "label": {
+        "text": "MCP (stdio)・.drawjsonを直接読み書き",
+        "fontSize": 12,
+        "fontWeight": "regular",
+        "hAlign": "center",
+        "vAlign": "middle",
+        "color": "#555555"
+      },
+      "id": "97bd65c7-57b8-456f-9043-3bb3217cc4a5",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 580,
+      "text": "・core / renderer は DOM 非依存 — 画面表示と書き出し（SVG/PNG/PDF）が常に同じ見た目になる",
+      "fontSize": 14,
+      "fontWeight": "regular",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "56e3652a-4d93-4bd1-bc96-0b81848c7a98",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 610,
+      "text": "・MCP は2形態: アプリ内ホスト（リアルタイム編集）とヘッドレス（ファイル直接編集 + プレビュー画像）",
+      "fontSize": 14,
+      "fontWeight": "regular",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "cb275e75-1593-4205-b3b9-137224969466",
+      "canvasId": "8d9877d5-ade1-43d6-b7eb-61c84bdce7e4"
+    }
+  ],
+  "assets": []
+}

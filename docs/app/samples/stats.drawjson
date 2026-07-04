@@ -1,0 +1,167 @@
+{
+  "version": 3,
+  "id": "ddea56b0-c10b-43f1-8110-e94bb0e8f0dd",
+  "name": "コード統計",
+  "updatedAt": "2026-07-04T00:16:24.278Z",
+  "canvases": [
+    {
+      "id": "f66ec02e-372f-415a-b89d-84a693a247e0",
+      "name": "キャンバス 1",
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "shapes": [
+    {
+      "type": "text",
+      "x": 60,
+      "y": 70,
+      "text": "Moshikizu コード統計（node_modules除く・2026-07-04時点）",
+      "fontSize": 24,
+      "fontWeight": "bold",
+      "color": "#1a1a1a",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "732880af-ec6c-4f43-a15e-d8c438a7d120",
+      "canvasId": "f66ec02e-372f-415a-b89d-84a693a247e0"
+    },
+    {
+      "type": "text",
+      "x": 60,
+      "y": 100,
+      "text": "表の「合計」行は =SUM() 数式、右のグラフはこの表を参照して描画されている",
+      "fontSize": 13,
+      "fontWeight": "regular",
+      "color": "#555555",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "30b4dfd8-9695-4083-a606-b7c3ec401d8a",
+      "canvasId": "f66ec02e-372f-415a-b89d-84a693a247e0"
+    },
+    {
+      "type": "table",
+      "x": 60,
+      "y": 130,
+      "colWidths": [
+        160,
+        110,
+        110
+      ],
+      "rowHeights": [
+        34,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        34
+      ],
+      "cells": [
+        [
+          "パッケージ",
+          "行数",
+          "ファイル数"
+        ],
+        [
+          "core",
+          "1631",
+          "17"
+        ],
+        [
+          "renderer",
+          "720",
+          "3"
+        ],
+        [
+          "mcp",
+          "241",
+          "1"
+        ],
+        [
+          "web",
+          "6873",
+          "40"
+        ],
+        [
+          "desktop",
+          "232",
+          "3"
+        ],
+        [
+          "server",
+          "430",
+          "4"
+        ],
+        [
+          "合計",
+          "=SUM(B2:B7)",
+          "=SUM(C2:C7)"
+        ]
+      ],
+      "headerRows": 1,
+      "footerRows": 1,
+      "headerCols": 1,
+      "formats": {
+        "7,1": {
+          "comma": true
+        },
+        "4,1": {
+          "comma": true
+        },
+        "1,1": {
+          "comma": true
+        }
+      },
+      "borderColor": "#94a3b8",
+      "borderWidth": 1,
+      "headerFill": "#e8eef7",
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "7f1d844d-b99e-4374-94b4-74d4c47dff16",
+      "canvasId": "f66ec02e-372f-415a-b89d-84a693a247e0"
+    },
+    {
+      "type": "chart",
+      "x": 500,
+      "y": 130,
+      "width": 400,
+      "height": 290,
+      "chartType": "bar",
+      "tableId": "7f1d844d-b99e-4374-94b4-74d4c47dff16",
+      "dataRange": "A1:B7",
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "c695fa8d-0f07-4435-8ba3-5b40ae4436ad",
+      "canvasId": "f66ec02e-372f-415a-b89d-84a693a247e0"
+    },
+    {
+      "type": "chart",
+      "x": 930,
+      "y": 130,
+      "width": 310,
+      "height": 290,
+      "chartType": "donut",
+      "tableId": "7f1d844d-b99e-4374-94b4-74d4c47dff16",
+      "dataRange": "A1:B7",
+      "strokeColor": "transparent",
+      "strokeWidth": 0,
+      "id": "684c551a-5791-4905-9f5d-48b2686c04b1",
+      "canvasId": "f66ec02e-372f-415a-b89d-84a693a247e0"
+    },
+    {
+      "type": "text",
+      "x": 500,
+      "y": 450,
+      "text": "棒: パッケージ別の行数 / ドーナツ: 行数の構成比（どちらも左の表を参照）",
+      "fontSize": 13,
+      "fontWeight": "regular",
+      "color": "#555555",
+      "strokeColor": "#1a1a1a",
+      "strokeWidth": 1,
+      "id": "19bd3d31-1543-48df-99c7-95ed4701a8b0",
+      "canvasId": "f66ec02e-372f-415a-b89d-84a693a247e0"
+    }
+  ],
+  "assets": []
+}
