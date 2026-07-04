@@ -36,6 +36,9 @@ if [ "$(uname)" = "Darwin" ]; then
     echo ""
     echo "完了: /Applications/Moshikizu.app を配置しました。"
     echo "（コード署名なしのため、初回は 右クリック > 開く で起動してください）"
+    echo ""
+    echo "同梱サンプル: $DIR/samples"
+    echo "  アプリの「ファイル > 開く」ダイアログで ⌘⇧G を押し、上のパスを貼り付けると開けます"
   fi
 else
   BIN="$HOME/.local/bin"
@@ -44,4 +47,5 @@ else
   chmod +x "$BIN/moshikizu"
   echo ""
   echo "完了: 'moshikizu' コマンドでブラウザ版が起動します（$BIN にPATHを通してください）"
+  echo "同梱サンプル: $DIR/samples（アプリの「ファイル > 開く」から）"
 fi

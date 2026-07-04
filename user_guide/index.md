@@ -32,6 +32,10 @@ npm run desktop       # デスクトップ版（Electron）
 アプリの「ファイル > 開く」から開けるほか、ブラウザ版なら
 `http://localhost:5173/?doc=/samples/architecture.drawjson` のように URL でも開けます。
 
+インストールスクリプトを使った場合の場所は **`~/.moshikizu/samples/`** です
+（隠しフォルダのため、macOS のファイルダイアログでは **⌘⇧G** を押して
+`~/.moshikizu/samples` と入力すると開けます）。
+
 | ファイル | 内容 |
 |---|---|
 | `architecture.drawjson` | このアプリのアーキテクチャ概念図 |
