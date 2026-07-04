@@ -492,6 +492,12 @@
 <h1 id="mcpapi">エージェント連携（MCP）とAPI<a class="headerlink" href="#mcpapi" title="Permanent link">&para;</a></h1>
 <p>Moshikizu は MCP（Model Context Protocol）サーバーを2形態で同梱しています。
 このガイドの図やサンプル文書は、実際にこの機能で Claude が描いたものです。</p>
+<blockquote>
+<p><strong>前提: MCP はローカルインストールした場合のみ使えます。</strong>
+アプリ内ホスト版はデスクトップ版（Electron）専用、ヘッドレス版はリポジトリが
+手元にあることが前提です。ブラウザ版プレイグラウンドや、コラボサーバー経由の
+ブラウザ利用では MCP 連携は使えません。</p>
+</blockquote>
 <p><img alt="アーキテクチャ" src="../images/architecture.png" /></p>
 <h2 id="1">1. ヘッドレス版（ファイルを直接編集）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>アプリを起動せず <code>.drawjson</code> を読み書きします。Claude Code への登録:</p>

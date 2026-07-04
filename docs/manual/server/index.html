@@ -579,7 +579,9 @@
 <p><strong>個人利用ならサーバーは不要です。</strong> デスクトップ版、または <code>apps/web/dist</code> を
 レンタルサーバー等に置くだけの静的ホスティングで完結します。
 チームでの共有（サーバー保存・作成者記録・コメント・テーマ共有）をしたい場合のみ、
-コラボサーバーを立てます。</p>
+コラボサーバーを立てます。
+なお、サーバーが提供するのは保存・認証・コメント等の共有機能のみで、
+<strong>エージェント連携（MCP）はサーバー経由のブラウザ利用では使えません</strong>（デスクトップ版専用）。</p>
 <p><img alt="サーバー構成" src="../images/deployment.png" /></p>
 <h2 id="docker">Docker で動かす（推奨）<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>moshikizu<span class="w"> </span>.
