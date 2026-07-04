@@ -32,8 +32,35 @@ if ($LASTEXITCODE -ne 0) { throw "アプリの作成が失敗しました" }
 
 $zip = Get-ChildItem "apps\desktop\release\*.zip" | Select-Object -First 1
 if (-not $zip) { throw "ビルド成果物（apps\desktop\release\*.zip）が見つかりません" }
-$dest = "$HOME\Moshikizu"
+
+# ユーザー単位インストールの慣例に従い %LOCALAPPDATA%\Programs へ配置
+$dest = "$env:LOCALAPPDATA\Programs\Moshikizu"
+if (Test-Path "$dest\Moshikizu.exe") {
+  try { Remove-Item -Recurse -Force $dest }
+  catch { throw "既存の Moshikizu を削除できません。アプリを終了してから再実行してください（$dest）" }
+}
 Expand-Archive -Path $zip.FullName -DestinationPath $dest -Force
+
+# スタートメニューにショートカットを作成
+$lnkPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Moshikizu.lnk"
+$shell = New-Object -ComObject WScript.Shell
+$lnk = $shell.CreateShortcut($lnkPath)
+$lnk.TargetPath = "$dest\Moshikizu.exe"
+$lnk.WorkingDirectory = $dest
+$lnk.Save()
+
+# 旧配置（ホーム直下）からの移行。アプリ本体しか入っていないため削除してよい
+$old = "$HOME\Moshikizu"
+if (Test-Path "$old\Moshikizu.exe") {
+  try {
+    Remove-Item -Recurse -Force $old
+    Write-Host "旧バージョン（$old）を削除しました。"
+  } catch {
+    Write-Host "注意: 旧バージョン（$old）を削除できませんでした。手動で削除してください。"
+  }
+}
+
 Write-Host ""
-Write-Host "完了: $dest に展開しました。Moshikizu.exe を起動してください。"
+Write-Host "完了: スタートメニューの「Moshikizu」から起動できます。"
+Write-Host "（本体の場所: $dest）"
 Write-Host "（コード署名なしのため SmartScreen 警告が出たら「詳細情報 > 実行」）"

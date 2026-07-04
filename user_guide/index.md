@@ -33,8 +33,8 @@ irm https://raw.githubusercontent.com/yupyom/moshikizu/main/install.ps1 | iex
 
 - **macOS**: `/Applications/Moshikizu.app`
   （コード署名なしのため、初回は**右クリック > 開く**で起動）
-- **Windows**: ホームフォルダの `Moshikizu\Moshikizu.exe`
-  （SmartScreen 警告が出たら「詳細情報 > 実行」）
+- **Windows**: スタートメニューの「Moshikizu」から起動
+  （本体は `%LOCALAPPDATA%\Programs\Moshikizu`。SmartScreen 警告が出たら「詳細情報 > 実行」）
 - **Linux**: `moshikizu` コマンドでブラウザ版が起動（`~/.local/bin` に配置）
 
 ### 手動セットアップ（セルフビルド）
