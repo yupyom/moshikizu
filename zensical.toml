@@ -1,0 +1,18 @@
+# Moshikizu ユーザーガイドのビルド設定（zensical）
+# ビルド: uvx zensical build（docs/ に出力）
+[project]
+site_name = "Moshikizu ユーザーガイド"
+docs_dir = "user_guide"
+site_dir = "docs/manual"
+site_url = "https://yupyom.github.io/moshikizu/manual/"
+
+nav = [
+  { "ホーム" = "index.md" },
+  { "チュートリアル" = "tutorial.md" },
+  { "機能ガイド" = "features.md" },
+  { "エージェント連携（MCP）" = "mcp.md" },
+  { "サーバー設置" = "server.md" },
+]
+
+[project.theme]
+language = "ja"

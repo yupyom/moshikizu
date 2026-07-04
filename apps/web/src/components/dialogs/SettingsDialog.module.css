@@ -1,0 +1,171 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 12px;
+  padding: 28px;
+  min-width: 360px;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row label {
+  width: 130px;
+  font-size: 13px;
+  color: #444;
+  flex-shrink: 0;
+}
+
+.row input[type="number"], .row input[type="text"] {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  width: 80px;
+}
+
+.row span {
+  font-size: 12px;
+  color: #666;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldGroup label {
+  font-size: 13px;
+  color: #444;
+  font-weight: 500;
+}
+
+.colorGrid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.widthRow {
+  display: flex;
+  gap: 8px;
+}
+
+.widthRow input {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.themeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.themeName {
+  font-size: 13px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.themeSwatches {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.themeSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.smallBtn {
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+  color: #333;
+}
+
+.smallBtn:hover {
+  background: #f3f4f6;
+}
+
+.dangerBtn {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.themeActions {
+  display: flex;
+  gap: 8px;
+}
+
+.themeEmpty {
+  font-size: 12px;
+  color: #999;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.cancel {
+  padding: 8px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}

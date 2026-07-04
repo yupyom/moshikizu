@@ -1,0 +1,30 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+}
+
+.btn:hover {
+  background: #f0f0f0;
+}
+
+.sep {
+  width: 1px;
+  height: 20px;
+  background: #e0e0e0;
+  margin: 0 2px;
+}

@@ -1,0 +1,201 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: #1a1a2e;
+  color: #fff;
+  user-select: none;
+}
+
+.appName {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #7eb8ff;
+  margin-right: 4px;
+}
+
+.projectName {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #444;
+  color: #fff;
+  font-size: 13px;
+  padding: 2px 4px;
+  width: 160px;
+  outline: none;
+}
+
+.projectName:focus {
+  border-bottom-color: #7eb8ff;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.btn {
+  padding: 6px 13px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: transparent;
+  color: #ddd;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.btn:hover {
+  background: #2a2a4e;
+  color: #fff;
+}
+
+.sep {
+  width: 1px;
+  height: 20px;
+  background: #444;
+  margin: 0 4px;
+}
+
+.selBtn {
+  border-color: #3b82f6;
+  color: #93c5fd;
+}
+
+.selBtn:hover {
+  background: #1e3a5f;
+  color: #bfdbfe;
+}
+
+/* ドロップダウンメニュー */
+.menuWrap {
+  position: relative;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 599;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 600;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  padding: 4px;
+  min-width: 230px;
+}
+
+.dropItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #111827;
+}
+
+.dropItem:hover {
+  background: #f3f4f6;
+}
+
+.dropItem:disabled {
+  color: #b0b4bb;
+  cursor: default;
+}
+
+.dropItem:disabled:hover {
+  background: none;
+}
+
+.shortcutHint {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-left: 16px;
+}
+
+/* 外部変更検知バナー */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 13px;
+  border-bottom: 1px solid #fcd34d;
+}
+
+.bannerBtn {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #f59e0b;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.bannerBtn:hover {
+  background: #d97706;
+}
+
+.bannerBtnGhost {
+  padding: 4px 10px;
+  border: 1px solid #fcd34d;
+  border-radius: 5px;
+  background: transparent;
+  color: #92400e;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dropSection {
+  font-size: 11px;
+  color: #6b7280;
+  padding: 6px 10px 2px;
+}
+
+.dropDivider {
+  border-top: 1px solid #f3f4f6;
+  margin: 4px 0;
+}
+
+.scaleRow {
+  display: flex;
+  gap: 4px;
+  padding: 4px 10px 8px;
+}
+
+.scaleBtn {
+  flex: 1;
+  font-size: 12px;
+  padding: 3px 0;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #111827;
+}
+
+.scaleActive {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}

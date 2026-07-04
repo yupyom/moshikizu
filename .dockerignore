@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+**/dist
+**/release
+apps/desktop/renderer
+.git
+dev_docs
+projects
+publish
+scripts
+.claude
+*.log
+.DS_Store

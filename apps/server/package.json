@@ -1,0 +1,30 @@
+{
+  "name": "@draw/server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Moshikizu セルフホスト協働サーバー",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --external:better-sqlite3 --banner:js=\"#!/usr/bin/env node\nimport { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\"",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@draw/core": "*",
+    "@hono/node-server": "^1.14.0",
+    "better-sqlite3": "^12.0.0",
+    "hono": "^4.7.0",
+    "nodemailer": "^9.0.3",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^24.12.2",
+    "@types/nodemailer": "^8.0.1",
+    "@types/qrcode": "^1.5.5",
+    "esbuild": "^0.25.0",
+    "typescript": "~6.0.2",
+    "vitest": "^4.1.4"
+  }
+}

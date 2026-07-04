@@ -1,0 +1,25 @@
+{
+  "name": "@draw/mcp",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "draw-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --external:@resvg/resvg-js --banner:js='#!/usr/bin/env node'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@draw/core": "*",
+    "@draw/renderer": "*",
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "esbuild": "^0.25.0",
+    "typescript": "~6.0.2"
+  }
+}

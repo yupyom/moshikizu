@@ -1,0 +1,121 @@
+.panel {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-left: 1px solid #e0e0e0;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 13px;
+}
+
+.hint {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.section {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+}
+
+.row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.widthBtn {
+  width: 46px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  color: #333;
+}
+
+.widthBtn.active {
+  border-color: #2563eb;
+  background: #e8f0fe;
+  color: #2563eb;
+}
+
+.numInput {
+  width: 68px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.unit {
+  font-size: 12px;
+  color: #666;
+}
+
+.select {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.textInput {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.fwBtn {
+  width: 30px;
+  height: 28px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+}
+
+.fwBtn.active {
+  background: #e8f0fe;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.memoArea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  background: #fffbeb;
+}

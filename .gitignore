@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+/apps/desktop/renderer/
+/apps/desktop/release/
+
+# Vite cache
+.vite/
+
+# User documents（同梱サンプルは除外しない）
+*.drawjson
+!samples/*.drawjson
+!apps/web/public/samples/*.drawjson
+
+# OS
+.DS_Store

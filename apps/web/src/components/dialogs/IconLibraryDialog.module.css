@@ -1,0 +1,161 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 560px;
+  max-width: 92vw;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.searchRow {
+  display: flex;
+  gap: 8px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.searchBtn {
+  padding: 7px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.searchBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.sectionLabel {
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  gap: 6px;
+  overflow-y: auto;
+  min-height: 60px;
+  max-height: 240px;
+  padding: 2px;
+}
+
+.cell {
+  position: relative;
+}
+
+.iconBtn {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+}
+
+.iconBtn:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.cornerBtn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #555;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.cell:hover .cornerBtn {
+  display: flex;
+}
+
+.cornerBtn:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+}
+
+.removeBtn:hover {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.message {
+  font-size: 13px;
+  color: #888;
+  padding: 8px 0;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.smallBtn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+}
+
+.smallBtn:hover {
+  background: #f3f4f6;
+}
+
+.credit {
+  font-size: 11px;
+  color: #999;
+}
