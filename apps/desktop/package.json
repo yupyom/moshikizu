@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "electron . --dev",
     "start": "electron .",
-    "package": "rm -rf renderer && cp -R ../web/dist renderer && electron-builder --mac dir",
-    "package:mac": "rm -rf renderer && cp -R ../web/dist renderer && electron-builder --mac zip",
-    "package:win": "rm -rf renderer && cp -R ../web/dist renderer && electron-builder --win zip"
+    "package": "node scripts/copy-renderer.cjs && electron-builder --mac dir",
+    "package:mac": "node scripts/copy-renderer.cjs && electron-builder --mac zip",
+    "package:win": "node scripts/copy-renderer.cjs && electron-builder --win zip"
   },
   "build": {
     "appId": "jp.yupyom.moshikizu",

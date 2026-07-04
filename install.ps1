@@ -22,16 +22,18 @@ if (Test-Path "$Dir\.git") {
 Set-Location $Dir
 Write-Host "=== 依存関係のインストール ==="
 npm install
+if ($LASTEXITCODE -ne 0) { throw "npm install が失敗しました" }
 Write-Host "=== ビルド ==="
 npm run build
+if ($LASTEXITCODE -ne 0) { throw "ビルドが失敗しました" }
 Write-Host "=== Windows アプリの作成 ==="
 npm run --workspace apps/desktop package:win
+if ($LASTEXITCODE -ne 0) { throw "アプリの作成が失敗しました" }
 
 $zip = Get-ChildItem "apps\desktop\release\*.zip" | Select-Object -First 1
-if ($zip) {
-  $dest = "$HOME\Moshikizu"
-  Expand-Archive -Path $zip.FullName -DestinationPath $dest -Force
-  Write-Host ""
-  Write-Host "完了: $dest に展開しました。Moshikizu.exe を起動してください。"
-  Write-Host "（コード署名なしのため SmartScreen 警告が出たら「詳細情報 > 実行」）"
-}
+if (-not $zip) { throw "ビルド成果物（apps\desktop\release\*.zip）が見つかりません" }
+$dest = "$HOME\Moshikizu"
+Expand-Archive -Path $zip.FullName -DestinationPath $dest -Force
+Write-Host ""
+Write-Host "完了: $dest に展開しました。Moshikizu.exe を起動してください。"
+Write-Host "（コード署名なしのため SmartScreen 警告が出たら「詳細情報 > 実行」）"
