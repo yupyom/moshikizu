@@ -4,6 +4,12 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('drawDesktop', {
+  /** 書類/Moshikizu/Templates の .drawjson 一覧 */
+  listTemplates: () => ipcRenderer.invoke('docs:list-templates'),
+  /** 書類/Moshikizu/Themes の .drawtheme.json 一覧 */
+  listThemes: () => ipcRenderer.invoke('docs:list-themes'),
+  /** 書類/Moshikizu の絶対パス */
+  getDocsPath: () => ipcRenderer.invoke('docs:path'),
   /** 更新確認（channel: 'main' | 'dev'）。結果 or {error} を返す */
   checkUpdate: (channel) => ipcRenderer.invoke('update:check', channel),
   platform: process.platform,

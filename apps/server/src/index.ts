@@ -16,7 +16,7 @@ import { getConnInfo } from '@hono/node-server/conninfo';
 import { Hono } from 'hono';
 import { getCookie, setCookie, deleteCookie } from 'hono/cookie';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join, relative, dirname } from 'node:path';
+import { join, relative, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import QRCode from 'qrcode';
 import { parseDocument, parseTheme } from '@draw/core';
@@ -204,7 +204,8 @@ app.get('/api/themes/:name', (c) => {
 app.put('/api/themes/:name', async (c) => {
   const user = c.get('user');
   const theme = parseTheme(await c.req.json()); // 検証込み
-  const name = c.req.param('name');
+  // macOSのNFDファイル名由来の濁点分解を正規化（同名テーマの重複行を防ぐ）
+  const name = c.req.param('name').normalize('NFC');
   db.prepare(`
     INSERT INTO themes (name, data, updated_at, updated_by) VALUES (?, ?, ?, ?)
     ON CONFLICT(name) DO UPDATE SET data = excluded.data,
@@ -312,7 +313,7 @@ app.post('/api/users/invite', async (c) => {
   if (!username?.trim() || !email?.includes('@')) {
     return c.json({ error: 'ユーザー名とメールアドレスが必要です' }, 400);
   }
-  const invite = createInvite(db, username.trim(), email.trim());
+  const invite = createInvite(db, username.trim().normalize('NFC'), email.trim());
   const url = `${baseUrl()}/?invite=${invite.token}`;
   let mailed = false;
   if (isMailEnabled()) {
@@ -385,7 +386,8 @@ app.post('/api/projects/:id/comments', async (c) => {
 
 // ---- 静的配信（webアプリ） ----
 
-app.use('/*', serveStatic({ root: relative(process.cwd(), STATIC_DIR) }));
+// Windowsでも動くようPOSIX区切りに（serveStaticはスラッシュ前提）
+app.use('/*', serveStatic({ root: relative(process.cwd(), STATIC_DIR).split(sep).join('/') }));
 
 serve({ fetch: app.fetch, port: PORT }, () => {
   console.log(`Moshikizu サーバー起動: http://localhost:${PORT}`);

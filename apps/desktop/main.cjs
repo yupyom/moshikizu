@@ -45,6 +45,7 @@ function compareVersions(a, b) {
   return 0;
 }
 
+const fs = require('node:fs');
 const path = require('node:path');
 const { startMcpHost } = require('./mcpHost.cjs');
 
@@ -159,7 +160,58 @@ function createWindow() {
   return win;
 }
 
+// ---- 書類/Moshikizu フォルダ（デフォルト保存先・テンプレート・テーマ置き場） ----
+const nfc = (t) => String(t).normalize('NFC');
+const DOCS_DIR = () => path.join(app.getPath('documents'), 'Moshikizu');
+
+function ensureDocsDirs() {
+  try {
+    const root = DOCS_DIR();
+    fs.mkdirSync(path.join(root, 'Templates'), { recursive: true });
+    fs.mkdirSync(path.join(root, 'Themes'), { recursive: true });
+    // 初回のみ同梱サンプルをコピー（発見しやすい場所に置く）
+    const dest = path.join(root, 'サンプル');
+    if (!fs.existsSync(dest)) {
+      const src = [
+        path.join(__dirname, 'renderer', 'samples'),
+        path.join(__dirname, '..', 'web', 'dist', 'samples'),
+        path.join(__dirname, '..', 'web', 'public', 'samples'),
+      ].find((d) => fs.existsSync(d));
+      if (src) {
+        fs.mkdirSync(dest, { recursive: true });
+        for (const f of fs.readdirSync(src)) {
+          if (f.endsWith('.drawjson')) fs.copyFileSync(path.join(src, f), path.join(dest, f));
+        }
+      }
+    }
+  } catch (err) {
+    console.error('書類/Moshikizu の初期化に失敗:', err.message);
+  }
+}
+
+/** 指定サブフォルダの拡張子一致ファイルを [{name, json}] で返す（名前はNFC正規化） */
+function listDocsFiles(sub, ext) {
+  try {
+    const dir = path.join(DOCS_DIR(), sub);
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir)
+      .filter((f) => f.endsWith(ext))
+      .sort()
+      .map((f) => ({
+        name: nfc(f.slice(0, -ext.length)),
+        json: fs.readFileSync(path.join(dir, f), 'utf-8'),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+ipcMain.handle('docs:list-templates', () => listDocsFiles('Templates', '.drawjson'));
+ipcMain.handle('docs:list-themes', () => listDocsFiles('Themes', '.drawtheme.json'));
+ipcMain.handle('docs:path', () => DOCS_DIR());
+
 app.whenReady().then(() => {
+  ensureDocsDirs();
   createWindow();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

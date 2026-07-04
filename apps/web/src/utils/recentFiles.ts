@@ -30,5 +30,5 @@ export async function addRecentFile(handle: FileSystemFileHandle, time: number):
       filtered.push(r);
     }
   }
-  await idbSet(KEY, [{ name: handle.name, handle, time }, ...filtered].slice(0, MAX));
+  await idbSet(KEY, [{ name: handle.name.normalize('NFC'), handle, time }, ...filtered].slice(0, MAX));
 }

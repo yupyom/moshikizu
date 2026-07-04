@@ -13,6 +13,9 @@ interface McpBridgeResponse {
 }
 
 interface DrawDesktopBridge {
+  listTemplates(): Promise<{ name: string; json: string }[]>;
+  listThemes(): Promise<{ name: string; json: string }[]>;
+  getDocsPath(): Promise<string>;
   /** 更新確認（channel: 'main' | 'dev'） */
   checkUpdate(channel: 'main' | 'dev'): Promise<
     { current: string; latest: string; isNewer: boolean; url: string; name: string } | { error: string } | null

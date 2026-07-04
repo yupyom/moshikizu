@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CANVAS_PRESETS } from '@draw/core';
 import { useDrawingStore } from '../../store/drawingStore';
+import { parseDocument } from '@draw/core';
 import { getRecentFiles, type RecentFile } from '../../utils/recentFiles';
 import styles from './SearchReplaceDialog.module.css';
 
@@ -28,9 +29,27 @@ export function WelcomeDialog({ onClose }: Props) {
   const store = useDrawingStore();
   const [recent, setRecent] = useState<RecentFile[]>([]);
 
+  const [templates, setTemplates] = useState<{ name: string; json: string }[]>([]);
+  const [docsPath, setDocsPath] = useState('');
+
   useEffect(() => {
     getRecentFiles().then(setRecent);
+    // デスクトップ版: 書類/Moshikizu/Templates をスキャン
+    window.drawDesktop?.listTemplates().then(setTemplates).catch(() => {});
+    window.drawDesktop?.getDocsPath().then(setDocsPath).catch(() => {});
   }, []);
+
+  // テンプレートから新規（id を外して「無題」として開く）
+  const newFromTemplate = (t: { name: string; json: string }) => {
+    try {
+      const doc = parseDocument(JSON.parse(t.json));
+      store.loadDocument({ ...doc, id: null });
+      store.setProject(null, `${t.name} のコピー`);
+      onClose();
+    } catch {
+      alert(`テンプレート「${t.name}」を読み込めませんでした。`);
+    }
+  };
 
   const newFromPreset = (w: number, h: number) => {
     store.newDocument(w, h);
@@ -54,7 +73,30 @@ export function WelcomeDialog({ onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
         style={{ width: 640, maxHeight: '84vh', overflowY: 'auto' }}
       >
-        <h2 className={styles.title}>Draw へようこそ</h2>
+        <h2 className={styles.title}>Moshikizu へようこそ</h2>
+
+        {templates.length > 0 && (
+          <>
+            <div style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
+              マイテンプレート
+              <span style={{ fontWeight: 400, color: '#999', marginLeft: 8, fontSize: 12 }}>
+                {docsPath ? `${docsPath}/Templates` : ''}
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {templates.map((t) => (
+                <button
+                  key={t.name}
+                  onClick={() => newFromTemplate(t)}
+                  style={{ padding: '10px 14px', fontSize: 13, border: '1px solid #d0d4dc', borderRadius: 8, background: '#fff', cursor: 'pointer' }}
+                >
+                  <span className="material-icons" style={{ fontSize: 15, verticalAlign: '-3px', marginRight: 6, color: '#2563eb' }}>description</span>
+                  {t.name}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         <div style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>新規作成</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 8 }}>

@@ -42,6 +42,22 @@ function Editor() {
     () => !new URLSearchParams(location.search).has('doc'),
   );
 
+  // デスクトップ版: 書類/Moshikizu/Themes の .drawtheme.json を起動時に取込（名前で上書き）
+  useEffect(() => {
+    if (!window.drawDesktop) return;
+    window.drawDesktop.listThemes().then(async (files) => {
+      const { parseTheme } = await import('@draw/core');
+      const st = useSettingsStore.getState();
+      for (const f of files) {
+        try {
+          st.addTheme(parseTheme(JSON.parse(f.json)));
+        } catch {
+          console.warn(`テーマ「${f.name}」を取込めませんでした`);
+        }
+      }
+    }).catch(() => {});
+  }, []);
+
   useEffect(() => {
     const docUrl = new URLSearchParams(location.search).get('doc');
     if (!docUrl) return;
